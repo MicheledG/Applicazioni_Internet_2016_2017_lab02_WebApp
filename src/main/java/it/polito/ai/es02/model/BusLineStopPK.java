@@ -12,6 +12,7 @@ public class BusLineStopPK implements Serializable{
 	private BusLine busLine;
 	@ManyToOne
 	private BusStop busStop;
+	private short sequenceNumber;
 	public BusLine getBusLine() {
 		return busLine;
 	}
@@ -24,6 +25,13 @@ public class BusLineStopPK implements Serializable{
 	public void setBusStop(BusStop busStop) {
 		this.busStop = busStop;
 	}
+	public short getSequenceNumber() {
+		return sequenceNumber;
+	}
+	public void setSequenceNumber(short sequenceNumber) {
+		this.sequenceNumber = sequenceNumber;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -53,8 +61,4 @@ public class BusLineStopPK implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 }

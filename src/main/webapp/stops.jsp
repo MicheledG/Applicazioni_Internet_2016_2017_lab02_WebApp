@@ -46,6 +46,7 @@
   <table class="table table-striped">
   	<thead>
   		<tr>
+  			<th>Seq. Nr.</th>
   			<th>Id</th>
   			<th>Name</th>
   			<th>Latitude</th>
@@ -55,18 +56,20 @@
   	<tbody>
   		<%
 			for(BusLineStop busLineStop: busLineStops){
-			BusStop busStop = busLineStop.getBusStop();
-			String id = busStop.getId();
-			String name = busStop.getName();
-			String latitude = String.format("%1$.5f", busStop.getLat());
-			String longitude = String.format("%1$.5f", busStop.getLng());
+				String sequenceNumber = String.format("%1$03d", busLineStop.getSequenceNumber());
+				BusStop busStop = busLineStop.getBusStop();
+				String id = busStop.getId();
+				String name = busStop.getName();
+				String latitude = String.format("%1$.5f", busStop.getLat());
+				String longitude = String.format("%1$.5f", busStop.getLng());
 		%>
-			<tr>
-				<td><%=id %></td>
-				<td><%=name %></td>
-				<td><%=latitude %></td>
-				<td><%=longitude %></td>
-			</tr>
+				<tr>
+					<td><%=sequenceNumber %></td>
+					<td><%=id %></td>
+					<td><%=name %></td>
+					<td><%=latitude %></td>
+					<td><%=longitude %></td>
+				</tr>
 		<% 	
 			}
   		%>

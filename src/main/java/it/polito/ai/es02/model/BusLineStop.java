@@ -13,13 +13,12 @@ import javax.persistence.JoinColumn;
 			joinColumns = @JoinColumn(name ="lineid")),
 	@AssociationOverride(
 			name="primaryKey.busStop",
-			joinColumns = @JoinColumn(name ="stopId"))
+			joinColumns = @JoinColumn(name ="stopid"))
 })
 public class BusLineStop {
 	
 	@EmbeddedId
 	private BusLineStopPK primaryKey;
-	private short sequenceNumber;
 	public BusLineStopPK getPrimaryKey() {
 		return primaryKey;
 	}
@@ -39,10 +38,10 @@ public class BusLineStop {
 		this.primaryKey.setBusStop(busStop);
 	}
 	public int getSequenceNumber() {
-		return sequenceNumber;
+		return this.primaryKey.getSequenceNumber();
 	}
 	public void setSequenceNumber(short sequenceNumber) {
-		this.sequenceNumber = sequenceNumber;
+		this.primaryKey.setSequenceNumber(sequenceNumber);
 	}
 	
 	
