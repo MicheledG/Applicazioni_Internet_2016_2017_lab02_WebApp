@@ -7,16 +7,20 @@
 
 <%
 	
+
+	LinesService linesService = null;
 	List<BusStop> busStopList = null;
+	String line = null;	
 	
-	LinesService linesService = (LinesService) request.getServletContext()
-	.getAttribute(AppListener.CONTEXT_ATTRIBUTE_LINES_SERVICE);
+	linesService = (LinesService) request.getServletContext()
+	.getAttribute(AppListener.CONTEXT_ATTRIBUTE_LINES_SERVICE);	
+		
+	line = request.getParameter("line");	
 	
-	if(linesService != null){
-		busStopList = linesService.getLineStop(null);
+	if(line != null){
+		busStopList = linesService.getLineStops(line);
 	}
 	
-
 %>
 
 
@@ -37,12 +41,14 @@
 </div>
 
 <div class="container">
-  <h1>GTT stops</h1>
+  <h1>GTT line <%=line%> stops</h1>
   <table class="table table-striped">
   	<thead>
   		<tr>
   			<th>Id</th>
   			<th>Name</th>
+  			<th>Latitude</th>
+  			<th>Longitude</th>
   		</tr>
   	</thead>
   	<tbody>
@@ -50,10 +56,14 @@
 			for(BusStop busStop: busStopList){
 			String id = busStop.getId();
 			String name = busStop.getName();
+			String latitude = String.format("%1$.5f", busStop.getLat());
+			String longitude = String.format("%1$.5f", busStop.getLng());
 		%>
 			<tr>
 				<td><%=id %></td>
 				<td><%=name %></td>
+				<td><%=latitude %></td>
+				<td><%=longitude %></td>
 			</tr>
 		<% 	
 			}

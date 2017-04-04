@@ -1,3 +1,5 @@
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Collection"%>
 <%@page import="it.polito.ai.es02.model.BusLine"%>
 <%@page import="java.util.List"%>
 <%@page import="it.polito.ai.es02.services.LinesService"%>
@@ -15,6 +17,8 @@
 	if(linesService != null){
 		busLineList = linesService.getLines();
 	}
+	
+	Collections.sort(busLineList);
 	
 %>
 

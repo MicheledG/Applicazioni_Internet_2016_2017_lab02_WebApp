@@ -8,6 +8,6 @@ import it.polito.ai.es02.model.BusStop;
 public interface LinesService {
 
 	public List<BusLine> getLines();
-	public List<BusStop> getLineStop(String lineId);
+	public List<BusStop> getLineStops(String lineId);
 	
 }

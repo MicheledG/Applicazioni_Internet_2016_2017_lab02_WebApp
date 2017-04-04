@@ -1,5 +1,6 @@
 package it.polito.ai.es02.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -31,18 +32,22 @@ public class LinesServiceImpl implements LinesService {
 		return busLineList;
 	}
 
-	public List<BusStop> getLineStop(String lineId) {
+	public List<BusStop> getLineStops(String lineId) {
 		
-		List<BusStop> busStopList = null;
+		
+		BusLine busLine = null;
+		List<BusStop> busStops = new ArrayList<BusStop>(); 
 		
 		//try accessing the db
 		Session session = sessionFactory.openSession();
-		String hql = "from BusStop";
-		Query query = session.createQuery(hql);
-		busStopList = query.list();
+		busLine = (BusLine) session.get(BusLine.class, lineId);
+		for (BusStop busStop : busLine.getStops()) {
+			busStops.add(busStop);
+		}
+		
 		session.close();
 			
-		return busStopList;
+		return busStops;
 	}
 
 

@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Entity;
 
 @Entity
-public class BusStop {
+public class BusStop{
 	
 	@Id
 	private String id;
@@ -36,6 +36,5 @@ public class BusStop {
 	public void setLng(double lng) {
 		this.lng = lng;
 	}
-	
 	
 }
