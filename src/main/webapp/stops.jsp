@@ -1,3 +1,4 @@
+<%@page import="it.polito.ai.es02.model.BusLineStop"%>
 <%@page import="it.polito.ai.es02.listeners.AppListener"%>
 <%@page import="it.polito.ai.es02.services.LinesService"%>
 <%@page import="it.polito.ai.es02.model.BusStop"%>
@@ -9,7 +10,7 @@
 	
 
 	LinesService linesService = null;
-	List<BusStop> busStopList = null;
+	List<BusLineStop> busLineStops = null;
 	String line = null;	
 	
 	linesService = (LinesService) request.getServletContext()
@@ -18,7 +19,7 @@
 	line = request.getParameter("line");	
 	
 	if(line != null){
-		busStopList = linesService.getLineStops(line);
+		busLineStops = linesService.getLineStops(line);
 	}
 	
 %>
@@ -53,7 +54,8 @@
   	</thead>
   	<tbody>
   		<%
-			for(BusStop busStop: busStopList){
+			for(BusLineStop busLineStop: busLineStops){
+			BusStop busStop = busLineStop.getBusStop();
 			String id = busStop.getId();
 			String name = busStop.getName();
 			String latitude = String.format("%1$.5f", busStop.getLat());

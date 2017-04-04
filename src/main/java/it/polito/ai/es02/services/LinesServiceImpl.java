@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import it.polito.ai.es02.model.BusLine;
+import it.polito.ai.es02.model.BusLineStop;
 import it.polito.ai.es02.model.BusStop;
 
 public class LinesServiceImpl implements LinesService {
@@ -32,22 +33,22 @@ public class LinesServiceImpl implements LinesService {
 		return busLineList;
 	}
 
-	public List<BusStop> getLineStops(String lineId) {
+	public List<BusLineStop> getLineStops(String lineId) {
 		
 		
 		BusLine busLine = null;
-		List<BusStop> busStops = new ArrayList<BusStop>(); 
+		List<BusLineStop> busLineStops = new ArrayList<BusLineStop>(); 
 		
 		//try accessing the db
 		Session session = sessionFactory.openSession();
 		busLine = (BusLine) session.get(BusLine.class, lineId);
-		for (BusStop busStop : busLine.getStops()) {
-			busStops.add(busStop);
+		for (BusLineStop busLineStop : busLine.getLineStops()) {
+			busLineStops.add(busLineStop);
 		}
 		
 		session.close();
 			
-		return busStops;
+		return busLineStops;
 	}
 
 
