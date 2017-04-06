@@ -35,9 +35,16 @@
 </head>
 <body>
 
-<div class="jumbotron text-center">
-  <h1>Bus WebApp</h1> 
-</div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.jsp">Bus WebApp</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.jsp">Lines</a></li>
+    </ul>
+  </div>
+</nav>
   
 <div class="container">
   <h1>GTT Lines</h1>
