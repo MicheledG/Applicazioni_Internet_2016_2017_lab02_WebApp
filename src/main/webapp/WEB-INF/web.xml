@@ -13,6 +13,9 @@
   <filter-mapping>
   	<filter-name>HibernateSessionRequestFilter</filter-name>
   	<url-pattern>/index.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>HibernateSessionRequestFilter</filter-name>
   	<url-pattern>/stops.jsp</url-pattern>
   </filter-mapping>
 </web-app>

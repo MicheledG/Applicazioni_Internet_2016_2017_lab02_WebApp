@@ -37,7 +37,7 @@ public class BusLineStop implements Comparable<BusLineStop>{
 	public void setBusStop(BusStop busStop){
 		this.primaryKey.setBusStop(busStop);
 	}
-	public int getSequenceNumber() {
+	public short getSequenceNumber() {
 		return this.primaryKey.getSequenceNumber();
 	}
 	public void setSequenceNumber(short sequenceNumber) {

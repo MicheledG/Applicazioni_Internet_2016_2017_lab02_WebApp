@@ -46,45 +46,42 @@
 <body>
 
 <div class="jumbotron text-center">
-  <h1>Bus WebApp</h1>
+  <a href="index.jsp"><h1>Bus WebApp</h1></a>
 </div>
 
 <div class="container">
-  <h1>GTT line <%=line%> stops</h1>
-  <table class="table table-striped">
-  	<thead>
-  		<tr>
-  			<th>Seq. Nr.</th>
-  			<th>Id</th>
-  			<th>Name</th>
-  			<th>Latitude</th>
-  			<th>Longitude</th>
-  		</tr>
-  	</thead>
-  	<tbody>
-  		<%
-			for(BusLineStop busLineStop: busLineStops){
-				String sequenceNumber = String.format("%1$03d", busLineStop.getSequenceNumber());
-				BusStop busStop = busLineStop.getBusStop();
-				String id = busStop.getId();
-				String name = busStop.getName();
-				String latitude = String.format("%1$.5f", busStop.getLat());
-				String longitude = String.format("%1$.5f", busStop.getLng());
-		%>
-				<tr>
-					<td><%=sequenceNumber %></td>
-					<td><%=id %></td>
-					<td><%=name %></td>
-					<td><%=latitude %></td>
-					<td><%=longitude %></td>
-				</tr>
-		<% 	
-			}
-  		%>
-  	</tbody>
-  </table>
-
+  	<h1>GTT line <%=line%> stops</h1>
+	
+	<h2>Map</h2>  
 	<div id='mapid'></div>
+	
+	<h2>List</h2>
+	<table class="table table-striped">
+	  	<thead>
+	  		<tr>
+	  			<th>Seq. Nr.</th>
+	  			<th>Id</th>
+	  			<th>Name</th>
+	  		</tr>
+	  	</thead>
+	  	<tbody>
+	  		<%
+				for(BusLineStop busLineStop: busLineStops){
+					String sequenceNumber = String.format("%1$03d", busLineStop.getSequenceNumber());
+					BusStop busStop = busLineStop.getBusStop();
+					String id = busStop.getId();
+					String name = busStop.getName();
+			%>
+					<tr>
+						<td><%=sequenceNumber %></td>
+						<td><%=id %></td>
+						<td><%=name %></td>
+					</tr>
+			<% 	
+				}
+	  		%>
+  		</tbody>
+  	</table>
 
 </div>  
 
@@ -97,11 +94,29 @@
 		    accessToken: 'pk.eyJ1IjoiY2hpZWZ6ZXBoeXIiLCJhIjoiY2oxM3djY3dhMDAxZTJxcXdseXJzNDZmeiJ9.fDhlEf0ME8ta_sl6-Hh06g'
 		}).addTo(map);
 		
+// 		var greenIcon = L.icon({
+// 		    iconUrl: 'marker-green.png',
+
+// 		    iconSize:     [50, 42], // size of the icon
+// 		    iconAnchor:   [25, 42], // point of the icon which will correspond to marker's location
+// 		    popupAnchor:  [-12, -42] // point from which the popup should open relative to the iconAnchor
+// 		});
+		
+// 		var blueIcon = L.icon({
+// 		    iconUrl: 'marker-blue.png',
+
+// 		    iconSize:     [50, 42], // size of the icon
+// 		    iconAnchor:   [25, 42], // point of the icon which will correspond to marker's location
+// 		    popupAnchor:  [-12, -42] // point from which the popup should open relative to the iconAnchor
+// 		});
+		
 		
 		var latLngs = [];
 		<%
 		for(BusLineStop busLineStop: busLineStops){
-			String sequenceNumber = String.format("%1$03d", busLineStop.getSequenceNumber());
+			//for each stop of the bus line create the elements to put on the map
+			//initially extract the informations
+			short sequenceNumber = busLineStop.getSequenceNumber();
 			BusStop busStop = busLineStop.getBusStop();
 			String id = busStop.getId();
 			String name = busStop.getName();
@@ -110,19 +125,37 @@
 			List<BusLineStop> stoppingLines = busStop.getStoppingLines();
 			
 		%>
+			//prepare message to show into the popup
 			var markerContent<%=id%> = "id: <%=id %><br>";
 			markerContent<%=id%> += "name: <%=name %><br>";
 			markerContent<%=id%> += "lines:<br>";
 			
 			<%
 			for(BusLineStop stoppingLine: stoppingLines){
+				String stoppingLineName = stoppingLine.getBusLine().getLine();
 			%>
-				markerContent<%=id%> += "- <%=stoppingLine.getBusLine().getLine() %><br>";
+				markerContent<%=id%> += "- <a href='stops.jsp?line=<%=stoppingLineName %>'><%=stoppingLineName %></a><br>";
 			<%
 			}
 			%>
 			
+<%-- 			<% --%>
+// 			//prepare the marker icon: FIRST STOP -> GREEN, otherwise blue
+// 			if(sequenceNumber == 1){
+<%-- 			%> --%>
+// 				//create the green marker
+<%-- 				var marker<%=id %> = L.marker([<%=lat %>, <%=lng %>], {icon: greenIcon}).addTo(map);	 --%>
+<%-- 			<% --%>
+// 			} else {
+<%-- 			%> --%>
+// 				//create the blue marker
+<%-- 				var marker<%=id %> = L.marker([<%=lat %>, <%=lng %>], {icon: blueIcon}).addTo(map); --%>
+<%-- 			<% --%>
+// 			}
+<%-- 			%> --%>
+			
 			var marker<%=id %> = L.marker([<%=lat %>, <%=lng %>]).addTo(map);
+			//link the marker to the popup message
 			marker<%=id %>.bindPopup(markerContent<%=id%>);
 			function onMarker<%=id %>Click(e){
 				marker<%=id %>.openPopup();
@@ -134,11 +167,12 @@
 		}
 		%>
 		
-		// create a red polyline from an array of LatLng points
-		var polyline = L.polyline(latLngs, {color: 'red'}).addTo(map);
-		// zoom the map to the polyline
-		map.fitBounds(polyline.getBounds());
-		
+// 		// create a red polyline from an array of LatLng points
+// 		var polyline = L.polyline(latLngs, {color: 'red'}).addTo(map);
+// 		// zoom the map to the polyline
+// 		map.fitBounds(polyline.getBounds());
+		map.setView(latLngs[0], 13);		
+
 	</script>
 
 </body>
