@@ -33,7 +33,21 @@
 		    accessToken: 'pk.eyJ1IjoiY2hpZWZ6ZXBoeXIiLCJhIjoiY2oxM3djY3dhMDAxZTJxcXdseXJzNDZmeiJ9.fDhlEf0ME8ta_sl6-Hh06g'
 		}).addTo(map);
 		
+		var marker0 = L.marker([45.071228, 7.685027]).addTo(map);
+		marker0.bindPopup("Piazza Castello");
+		function onMarker0Click(e){
+			marker0.openPopup();
+		}
+		marker0.on('click', onMarker0Click);
 		
+		
+		var marker1 = L.marker([45.109781, 7.641264]).addTo(map);
+		marker1.bindPopup("Juventus Stadium");
+		function onMarker1Click(e){
+			marker1.openPopup();
+		}
+		marker1.on('click', onMarker1Click);
+			
 	</script>
 	
 	
