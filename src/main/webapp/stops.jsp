@@ -93,24 +93,7 @@
  		    id: 'mapbox.streets',
 		    accessToken: 'pk.eyJ1IjoiY2hpZWZ6ZXBoeXIiLCJhIjoiY2oxM3djY3dhMDAxZTJxcXdseXJzNDZmeiJ9.fDhlEf0ME8ta_sl6-Hh06g'
 		}).addTo(map);
-		
-// 		var greenIcon = L.icon({
-// 		    iconUrl: 'marker-green.png',
-
-// 		    iconSize:     [50, 42], // size of the icon
-// 		    iconAnchor:   [25, 42], // point of the icon which will correspond to marker's location
-// 		    popupAnchor:  [-12, -42] // point from which the popup should open relative to the iconAnchor
-// 		});
-		
-// 		var blueIcon = L.icon({
-// 		    iconUrl: 'marker-blue.png',
-
-// 		    iconSize:     [50, 42], // size of the icon
-// 		    iconAnchor:   [25, 42], // point of the icon which will correspond to marker's location
-// 		    popupAnchor:  [-12, -42] // point from which the popup should open relative to the iconAnchor
-// 		});
-		
-		
+				
 		var latLngs = [];
 		<%
 		for(BusLineStop busLineStop: busLineStops){
@@ -139,21 +122,6 @@
 			}
 			%>
 			
-<%-- 			<% --%>
-// 			//prepare the marker icon: FIRST STOP -> GREEN, otherwise blue
-// 			if(sequenceNumber == 1){
-<%-- 			%> --%>
-// 				//create the green marker
-<%-- 				var marker<%=id %> = L.marker([<%=lat %>, <%=lng %>], {icon: greenIcon}).addTo(map);	 --%>
-<%-- 			<% --%>
-// 			} else {
-<%-- 			%> --%>
-// 				//create the blue marker
-<%-- 				var marker<%=id %> = L.marker([<%=lat %>, <%=lng %>], {icon: blueIcon}).addTo(map); --%>
-<%-- 			<% --%>
-// 			}
-<%-- 			%> --%>
-			
 			var marker<%=id %> = L.marker([<%=lat %>, <%=lng %>]).addTo(map);
 			//link the marker to the popup message
 			marker<%=id %>.bindPopup(markerContent<%=id%>);
@@ -171,7 +139,7 @@
 // 		var polyline = L.polyline(latLngs, {color: 'red'}).addTo(map);
 // 		// zoom the map to the polyline
 // 		map.fitBounds(polyline.getBounds());
-		map.setView(latLngs[0], 13);		
+		map.fitBounds(latLngs);		
 
 	</script>
 
