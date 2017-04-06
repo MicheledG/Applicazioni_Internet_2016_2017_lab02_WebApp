@@ -15,7 +15,7 @@
 	.getAttribute(AppListener.CONTEXT_ATTRIBUTE_LINES_SERVICE);
 	
 	if(linesService != null){
-		busLineList = linesService.getLines();
+		busLineList = linesService.getBusLines();
 	}
 	
 	Collections.sort(busLineList);

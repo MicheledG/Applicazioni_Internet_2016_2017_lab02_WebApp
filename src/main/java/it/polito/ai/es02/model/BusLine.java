@@ -5,9 +5,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,10 +14,6 @@ public class BusLine implements Comparable<BusLine>{
 	private String line;
 	private String description;
 	
-//	@ManyToMany
-//	@JoinTable(name="buslinestop",
-//	joinColumns = {@JoinColumn(name="lineid")},
-//	inverseJoinColumns ={@JoinColumn(name="stopid")})
 	@OneToMany(mappedBy="primaryKey.busLine")
 	private List<BusLineStop> lineStops = new ArrayList<BusLineStop>();
 	

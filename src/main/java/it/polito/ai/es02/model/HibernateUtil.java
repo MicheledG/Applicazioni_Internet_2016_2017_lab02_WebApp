@@ -20,7 +20,7 @@ public class HibernateUtil {
 	private static final String HBM2DDL_AUTO_SETTING = "validate";
 	private static final String FORMAT_SQL_SETTING = "true";
 	private static final String SHOW_SQL_SETTING = "true";
-	
+	private static final String CURRENT_SESSION_CONTEXT_CLASS_SETTING ="thread";
 	
 	private static final SessionFactory sessionFactory = buildSessionFactory();
     
@@ -34,6 +34,7 @@ public class HibernateUtil {
 				.applySetting(Environment.HBM2DDL_AUTO, HBM2DDL_AUTO_SETTING)
 				.applySetting(Environment.FORMAT_SQL, FORMAT_SQL_SETTING)
 				.applySetting(Environment.SHOW_SQL, SHOW_SQL_SETTING)
+				.applySetting(Environment.CURRENT_SESSION_CONTEXT_CLASS, CURRENT_SESSION_CONTEXT_CLASS_SETTING)
 				.build();
 			Metadata metadata= new MetadataSources(serviceRegistry)
 				.addAnnotatedClass(BusLine.class)  //for all classes

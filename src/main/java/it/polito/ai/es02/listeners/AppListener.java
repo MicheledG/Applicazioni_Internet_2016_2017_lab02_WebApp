@@ -30,8 +30,7 @@ public class AppListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
-    	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    	LinesService linesService = new LinesServiceImpl(sessionFactory);
+    	LinesService linesService = new LinesServiceImpl();
     	arg0.getServletContext().setAttribute(CONTEXT_ATTRIBUTE_LINES_SERVICE, linesService);
     }
 	

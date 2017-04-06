@@ -15,7 +15,7 @@ import javax.persistence.JoinColumn;
 			name="primaryKey.busStop",
 			joinColumns = @JoinColumn(name ="stopid"))
 })
-public class BusLineStop {
+public class BusLineStop implements Comparable<BusLineStop>{
 	
 	@EmbeddedId
 	private BusLineStopPK primaryKey;
@@ -42,6 +42,9 @@ public class BusLineStop {
 	}
 	public void setSequenceNumber(short sequenceNumber) {
 		this.primaryKey.setSequenceNumber(sequenceNumber);
+	}
+	public int compareTo(BusLineStop o) {
+		return this.primaryKey.compareTo(o.getPrimaryKey());
 	}
 	
 	

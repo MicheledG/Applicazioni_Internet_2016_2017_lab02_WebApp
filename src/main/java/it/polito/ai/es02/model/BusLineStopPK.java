@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class BusLineStopPK implements Serializable{
+public class BusLineStopPK implements Serializable, Comparable<BusLineStopPK>{
 	
 	@ManyToOne
 	private BusLine busLine;
@@ -60,5 +60,10 @@ public class BusLineStopPK implements Serializable{
 		} else if (!busStop.equals(other.busStop))
 			return false;
 		return true;
+	}
+	public int compareTo(BusLineStopPK o) {
+		Short thisSequence = this.sequenceNumber;
+		Short thatSequence = o.getSequenceNumber();
+		return thisSequence.compareTo(thatSequence);
 	}
 }

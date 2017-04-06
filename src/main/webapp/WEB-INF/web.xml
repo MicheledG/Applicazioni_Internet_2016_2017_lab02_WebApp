@@ -4,4 +4,15 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>HibernateSessionRequestFilter</filter-name>
+  	<display-name>HibernateSessionRequestFilter</display-name>
+  	<description></description>
+  	<filter-class>it.polito.ai.es02.filters.HibernateSessionRequestFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>HibernateSessionRequestFilter</filter-name>
+  	<url-pattern>/index.jsp</url-pattern>
+  	<url-pattern>/stops.jsp</url-pattern>
+  </filter-mapping>
 </web-app>

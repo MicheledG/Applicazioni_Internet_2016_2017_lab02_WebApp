@@ -10,45 +10,71 @@ import org.hibernate.query.Query;
 import it.polito.ai.es02.model.BusLine;
 import it.polito.ai.es02.model.BusLineStop;
 import it.polito.ai.es02.model.BusStop;
+import it.polito.ai.es02.model.HibernateUtil;
 
 public class LinesServiceImpl implements LinesService {
 	
 	private SessionFactory sessionFactory;
 	
-	public LinesServiceImpl(SessionFactory sessionFactory){
-		this.sessionFactory = sessionFactory;
+	public LinesServiceImpl(){
+		this.sessionFactory = HibernateUtil.getSessionFactory();
 	}
-	
-	public List<BusLine> getLines() {
 
-		List<BusLine> busLineList = null;
+	public List<BusLine> getBusLines() {
+		
+		List<BusLine> busLines = null;
 		
 		//try accessing the db
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String hql = "from BusLine";
 		Query query = session.createQuery(hql);
-		busLineList = query.list();
-		session.close();
+		busLines = query.list();
 			
-		return busLineList;
+		return busLines;
 	}
 
-	public List<BusLineStop> getLineStops(String lineId) {
+	public List<BusStop> getBusStops() {
 		
+		List<BusStop> busStops = null;
+		
+		//try accessing the db
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from BusStop";
+		Query query = session.createQuery(hql);
+		busStops = query.list();
+			
+		return busStops;
+	
+	}
+
+	public List<BusLineStop> getBusLineStops(String lineId) {
 		
 		BusLine busLine = null;
 		List<BusLineStop> busLineStops = new ArrayList<BusLineStop>(); 
 		
 		//try accessing the db
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		busLine = (BusLine) session.get(BusLine.class, lineId);
 		for (BusLineStop busLineStop : busLine.getLineStops()) {
 			busLineStops.add(busLineStop);
 		}
-		
-		session.close();
 			
 		return busLineStops;
+	}
+
+	public List<BusLineStop> getStoppingLines(String stopId) {
+		
+		BusStop busStop = null;
+		List<BusLineStop> stoppingLines = new ArrayList<BusLineStop>(); 
+		
+		//try accessing the db
+		Session session = sessionFactory.getCurrentSession();
+		busStop = (BusStop) session.get(BusStop.class, stopId);
+		for (BusLineStop stoppingLine : busStop.getStoppingLines()) {
+			stoppingLines.add(stoppingLine);
+		}
+			
+		return stoppingLines;
 	}
 
 
