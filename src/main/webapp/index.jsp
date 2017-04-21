@@ -4,8 +4,8 @@
 <%@page import="java.util.List"%>
 <%@page import="it.polito.ai.es02.services.LinesService"%>
 <%@page import="it.polito.ai.es02.listeners.AppListener"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%
 

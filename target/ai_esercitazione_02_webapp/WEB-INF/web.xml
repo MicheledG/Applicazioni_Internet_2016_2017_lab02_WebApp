@@ -4,14 +4,18 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>TestServlet</servlet-name>
-  	<display-name>TestServlet</display-name>
+  <filter>
+  	<filter-name>HibernateSessionRequestFilter</filter-name>
+  	<display-name>HibernateSessionRequestFilter</display-name>
   	<description></description>
-  	<servlet-class>it.polito.ai.es02.servlets.TestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>TestServlet</servlet-name>
-  	<url-pattern>/TestServlet</url-pattern>
-  </servlet-mapping>
+  	<filter-class>it.polito.ai.es02.filters.HibernateSessionRequestFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>HibernateSessionRequestFilter</filter-name>
+  	<url-pattern>/index.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>HibernateSessionRequestFilter</filter-name>
+  	<url-pattern>/stops.jsp</url-pattern>
+  </filter-mapping>
 </web-app>
